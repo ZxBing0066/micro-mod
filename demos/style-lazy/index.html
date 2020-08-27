@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mod</title>
+        <script src="http://localhost:8080/style-lazy.js"></script>
+        <script>
+            mod.config({
+                modules: {
+                    theme: {
+                        css: './src/theme.css',
+                        type: 'style-lazy'
+                    }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            mod.import('theme').then(theme => {
+                theme.use();
+                setTimeout(() => {
+                    theme.unuse();
+                }, 5000);
+            });
+        </script>
+    </body>
+</html>

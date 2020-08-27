@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mod</title>
+        <script src="http://localhost:8080/amd.js"></script>
+        <script>
+            mod.config({
+                modules: {
+                    react: {
+                        js: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.development.js',
+                        type: 'amd'
+                    },
+                    'react-dom': {
+                        js: 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.development.js',
+                        type: 'amd'
+                    },
+                    theme: {
+                        css: './src/theme.css'
+                    }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            mod.import(['react', 'react-dom']).then(([React, ReactDOM]) => {
+                console.log(React, ReactDOM);
+                const el = document.getElementById('app');
+                ReactDOM.render(
+                    React.createElement(
+                        'div',
+                        { style: { background: '#ccc', padding: '30px', textAlign: 'center' } },
+                        'demo'
+                    ),
+                    el
+                );
+            });
+            mod.import('theme');
+        </script>
+    </body>
+</html>
