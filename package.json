@@ -1,32 +1,59 @@
 {
-    "devDependencies": {
-        "@babel/core": "^7.10.2",
-        "@babel/generator": "^7.10.2",
-        "@babel/parser": "^7.10.2",
-        "@babel/plugin-proposal-class-properties": "^7.10.1",
-        "@babel/plugin-proposal-optional-chaining": "^7.10.1",
-        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-        "@babel/plugin-transform-runtime": "^7.10.1",
-        "@babel/preset-env": "^7.10.2",
-        "@babel/preset-react": "^7.10.1",
-        "@babel/preset-typescript": "^7.10.1",
-        "@babel/runtime": "^7.10.2",
-        "@babel/traverse": "^7.10.1",
-        "babel-loader": "^8.1.0",
-        "core-js": "^3.6.5",
-        "file-loader": "^6.0.0",
-        "html-webpack-plugin": "^4.3.0",
-        "typescript": "^3.9.5",
-        "url-loader": "^4.1.0",
-        "webpack": "^4.43.0",
-        "webpack-bundle-analyzer": "^3.8.0",
-        "webpack-cli": "^3.3.11",
-        "webpack-dev-server": "^3.11.0"
-    },
-    "dependencies": {
-        "axios": "^0.19.2"
-    },
-    "scripts": {
-        "start": "webpack-dev-server --mode=development"
-    }
+  "name": "@rapiop/mod",
+  "description": "A module loader support umd and own md",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rapiop/mod.git"
+  },
+  "keywords": [
+    "rapiop",
+    "module",
+    "loader",
+    "css",
+    "style"
+  ],
+  "bugs": {
+    "url": "https://github.com/rapiop/mod/issues"
+  },
+  "homepage": "https://github.com/rapiop/mod#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.10.2",
+    "@babel/generator": "^7.10.2",
+    "@babel/parser": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-typescript": "^7.10.1",
+    "@babel/traverse": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "typescript": "^3.9.5",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "@babel/runtime": "^7.10.2",
+    "core-js": "^3.6.5"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack",
+    "build:lib": "rm -rf lib/ && babel src/ -d lib/ -x \".js\",\".ts\" --config-file \"./.babelrc.js\" --source-maps",
+    "build:lib-without-polyfill": "rm -rf lib/ && babel src/ -d lib/ -x \".js\",\".ts\" --config-file \"./.babelrc.without.polyfill.js\" --source-maps",
+    "before-publish": "npm run build:lib && npm run build:lib-without-polyfill",
+    "publish:patch": "npm run before-publish && npm version patch && npm publish",
+    "publish:minor": "npm run before-publish && npm version minor && npm publish",
+    "publish:major": "npm run before-publish && npm version major && npm publish"
+  }
 }
