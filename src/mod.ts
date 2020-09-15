@@ -20,7 +20,7 @@ const loadModule = promiseOnce(async module => {
     const moduleInfo = stringModuleResolve(module);
     if (!moduleInfo) return;
 
-    if (moduleInfo.type) {
+    if (moduleInfo.type && moduleInfo.type !== 'immediate') {
         let type = moduleInfo.type,
             options;
         if (typeof type !== 'string') {
@@ -37,10 +37,19 @@ const loadModule = promiseOnce(async module => {
         return;
     }
     const { js = [], css = [], dep = [] } = moduleInfo;
-    const jsLoad = js.map(f => loadScript(f));
-    const cssLoad = css.map(f => loadCSS(f));
-    const depsLoad = dep.map(dep => loadModule(dep));
-    return await Promise.all([...jsLoad, ...cssLoad, ...depsLoad]);
+    const moduleLoad = async () => {
+        const jsLoad = js.map(f => loadScript(f));
+        const cssLoad = css.map(f => loadCSS(f));
+        await Promise.all([...jsLoad, ...cssLoad]);
+        updateModule(module, 2);
+    };
+    const depLoad = async () => {
+        const depLoad = dep.map(dep => loadModule(dep));
+        await Promise.all(depLoad);
+    };
+    await Promise.all([moduleLoad(), depLoad()]);
+    updateModule(module, 5);
+    return moduleInfo;
 });
 
 const _import = async (modules: string | string[] = []): Promise<unknown | unknown[]> => {
@@ -49,8 +58,12 @@ const _import = async (modules: string | string[] = []): Promise<unknown | unkno
         modules = [modules];
         isSingle = true;
     }
-    await Promise.all(modules.map(loadModule));
-    await Promise.all(modules.map(module => waitModule(module, 6)));
+    const moduleInfos = await Promise.all(modules.map(loadModule));
+    await Promise.all(
+        moduleInfos.map((moduleInfo, i) =>
+            moduleInfo.type === 'immediate' ? waitModule(modules[i], 2) : waitModule(modules[i], 6)
+        )
+    );
     return isSingle ? getModuleExports(modules[0]) : modules.map(getModuleExports);
 };
 

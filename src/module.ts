@@ -34,6 +34,10 @@ export const defined = id => moduleMap[id]?.status >= 6;
 export const getStatus = id => moduleMap[id]?.status;
 
 export const update = (id, status, data?) => {
+    const moduleStatus = getStatus(id);
+    if (moduleStatus >= 6) {
+        return;
+    }
     const moduleState = getState(id);
     Object.assign(moduleState, { status }, data);
     const pendingQueue = pendingMap[id];

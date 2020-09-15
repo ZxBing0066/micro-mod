@@ -7,10 +7,12 @@ export interface ModuleInfo {
     css?: string | string[];
     dep?: string | string[];
     type?: string | [string, any];
+    module?: boolean;
 }
 export interface FinalModuleInfo {
     js: string[];
     css: string[];
     dep: string[];
     type?: string | [string, any];
+    module?: boolean;
 }

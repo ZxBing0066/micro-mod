@@ -32,7 +32,8 @@ export const moduleInfoResolver = (module: Module): FinalModuleInfo => {
     }
     if (typeof moduleInfo === 'string' || isFiles(moduleInfo)) {
         moduleInfo = {
-            js: moduleInfo
+            js: moduleInfo,
+            type: 'immediate'
         };
     }
     const { js, css, dep } = moduleInfo;
