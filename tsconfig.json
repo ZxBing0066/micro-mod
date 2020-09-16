@@ -5,7 +5,8 @@
         "emitDeclarationOnly": true,
         // Ensure that Babel can safely transpile files in the TypeScript project
         "isolatedModules": true,
-        "outDir": "./lib",
+        "outDir": "./lib"
     },
-    "exclude": ["code"]
+    "include": ["src/**/*"],
+    "exclude": ["code", "lib", "dist", "node_modules"]
 }

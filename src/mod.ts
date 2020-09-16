@@ -1,4 +1,4 @@
-import { stringModuleResolve } from './config';
+import { stringModuleResolve, getTimeout } from './config';
 import { load as loadScript } from './loader/scriptLoaderPromise';
 import { load as loadCSS } from './loader/cssLoader';
 import promiseOnce from './util/promiseOnce';
@@ -54,6 +54,7 @@ const loadModule = promiseOnce(async module => {
 
 const _import = async (modules: string | string[] = []): Promise<unknown | unknown[]> => {
     let isSingle = false;
+    const timeout = getTimeout();
     if (typeof modules === 'string') {
         modules = [modules];
         isSingle = true;
@@ -61,7 +62,7 @@ const _import = async (modules: string | string[] = []): Promise<unknown | unkno
     const moduleInfos = await Promise.all(modules.map(loadModule));
     await Promise.all(
         moduleInfos.map((moduleInfo, i) =>
-            moduleInfo.type === 'immediate' ? waitModule(modules[i], 2) : waitModule(modules[i], 6)
+            moduleInfo.type === 'immediate' ? waitModule(modules[i], 2, timeout) : waitModule(modules[i], 6, timeout)
         )
     );
     return isSingle ? getModuleExports(modules[0]) : modules.map(getModuleExports);

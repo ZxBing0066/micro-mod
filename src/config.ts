@@ -4,6 +4,7 @@ import { ModuleInfo, FinalModuleInfo } from './interface';
 type Module = string | string[] | ModuleInfo;
 
 let _config: {
+    timeout?: number;
     baseUrl?: string;
     modules?: {
         [module: string]: Module;
@@ -65,5 +66,7 @@ const config = (config = {}) => {
         ...config
     };
 };
+
+export const getTimeout = () => _config.timeout;
 
 export default config;

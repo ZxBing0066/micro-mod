@@ -50,13 +50,23 @@ export const update = (id, status, data?) => {
     }
 };
 
-export const wait = async (id, status) => {
+export const wait = async (id, status, timeout?: number) => {
     if (getStatus(id) >= status) {
         return;
     }
     if (!pendingMap[id]) pendingMap[id] = {};
     if (!pendingMap[id][status]) pendingMap[id][status] = [];
-    const [pending, ready] = pendingFactory();
+    const [pending, ready, error] = pendingFactory();
     pendingMap[id][status].push(ready);
+    let timeoutTimer;
+    if (timeout) {
+        timeoutTimer = setTimeout(() => {
+            pendingMap[id][status] = pendingMap[id][status].filter(job => job !== ready);
+            error(new Error(`Wait for module ${id} timeout`));
+        }, timeout);
+    }
     await pending;
+    if (timeoutTimer) {
+        clearTimeout(timeoutTimer);
+    }
 };
