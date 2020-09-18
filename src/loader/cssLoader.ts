@@ -4,6 +4,7 @@ const loadedStyleMap: { [href: string]: boolean } = {};
 
 export const load = (href: string) => {
     if (loadedStyleMap[href]) return;
+    if (!href) return;
     const el = document.createElement('link');
     el.type = 'text/css';
     el.rel = 'stylesheet';
