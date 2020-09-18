@@ -8,8 +8,8 @@ type ScriptElement = HTMLScriptElement & {
 const scriptStateMap: { [href: string]: number } = {};
 
 function load(path, callback) {
-    var el = document.createElement('script') as ScriptElement,
-        loaded;
+    const el = document.createElement('script') as ScriptElement;
+    let loaded;
 
     function handler(event) {
         if ((el.readyState && !/^c|loade/.test(el.readyState)) || loaded) return;
