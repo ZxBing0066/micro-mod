@@ -1,0 +1,3 @@
+window.globalModule = {
+    name: 'globalModule'
+};

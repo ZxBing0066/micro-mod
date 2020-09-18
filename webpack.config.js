@@ -7,7 +7,14 @@ module.exports = {
         amd: ['./index.js', './src/resolver/amd.ts'],
         global: ['./index.js', './src/resolver/global.ts'],
         'css-lazy': ['./index.js', './src/resolver/css-lazy.ts'],
-        'style-lazy': ['./index.js', './src/resolver/style-lazy.ts']
+        'style-lazy': ['./index.js', './src/resolver/style-lazy.ts'],
+        all: [
+            './index.js',
+            './src/resolver/amd.ts',
+            './src/resolver/global.ts',
+            './src/resolver/css-lazy.ts',
+            './src/resolver/style-lazy.ts'
+        ]
     },
     output: {
         filename: '[name].js'

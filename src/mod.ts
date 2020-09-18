@@ -1,4 +1,4 @@
-import { stringModuleResolve, getTimeout } from './config';
+import { getTimeout, moduleInfoResolver } from './config';
 import { load as loadScript } from './loader/scriptLoaderPromise';
 import { load as loadCSS } from './loader/cssLoader';
 import promiseOnce from './util/promiseOnce';
@@ -9,30 +9,30 @@ import {
     defined as moduleDefined,
     wait as waitModule
 } from './module';
+import { ModuleInfo } from './interface';
 
 const moduleResolverMap = {};
 export const registerModuleResolver = (type, resolver) => {
     moduleResolverMap[type] = resolver;
 };
 
-const loadModule = promiseOnce(async module => {
-    if (!module) return;
-    const moduleInfo = stringModuleResolve(module);
+const loadModule = promiseOnce(async (moduleKey, moduleInfo) => {
     if (!moduleInfo) return;
 
-    if (moduleInfo.type && moduleInfo.type !== 'immediate') {
+    const isModule = moduleInfo.type !== 'immediate';
+    if (moduleInfo.type && isModule) {
         let type = moduleInfo.type,
             options;
         if (typeof type !== 'string') {
             [type, options] = type;
         }
         if (moduleResolverMap[type]) {
-            return await moduleResolverMap[type](module, options);
+            return await moduleResolverMap[type](moduleKey, options);
         }
     }
 
     try {
-        registerModule(module);
+        if (isModule) registerModule(moduleKey);
     } catch (error) {
         return;
     }
@@ -41,29 +41,33 @@ const loadModule = promiseOnce(async module => {
         const jsLoad = js.map(f => loadScript(f));
         const cssLoad = css.map(f => loadCSS(f));
         await Promise.all([...jsLoad, ...cssLoad]);
-        updateModule(module, 2);
+        if (isModule) updateModule(moduleKey, 2);
     };
     const depLoad = async () => {
-        const depLoad = dep.map(dep => loadModule(dep));
+        const depLoad = dep.map(_import);
         await Promise.all(depLoad);
     };
     await Promise.all([moduleLoad(), depLoad()]);
-    updateModule(module, 5);
+    if (isModule) updateModule(moduleKey, 5);
     return moduleInfo;
 });
 
-const _import = async (modules: string | string[] = []): Promise<unknown | unknown[]> => {
+type module = string | ModuleInfo;
+
+const isArrayModules = (modules: module | module[]): modules is module[] =>
+    Object.prototype.toString.call(modules) === '[object Array]';
+
+const _import = async (modules: module | module[] = []): Promise<unknown | unknown[]> => {
     let isSingle = false;
     const timeout = getTimeout();
-    if (typeof modules === 'string') {
+    if (!isArrayModules(modules)) {
         modules = [modules];
         isSingle = true;
     }
-    const moduleInfos = await Promise.all(modules.map(loadModule));
+    const moduleInfos = modules.map(moduleInfoResolver);
+    await Promise.all(moduleInfos.map(moduleInfo => loadModule(moduleInfo.key, moduleInfo)));
     await Promise.all(
-        moduleInfos.map((moduleInfo, i) =>
-            moduleInfo.type === 'immediate' ? waitModule(modules[i], 2, timeout) : waitModule(modules[i], 6, timeout)
-        )
+        moduleInfos.map((moduleInfo, i) => moduleInfo.type !== 'immediate' && waitModule(moduleInfo.key, 6, timeout))
     );
     return isSingle ? getModuleExports(modules[0]) : modules.map(getModuleExports);
 };

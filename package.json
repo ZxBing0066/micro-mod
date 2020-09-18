@@ -55,6 +55,7 @@
     "before-publish": "rm -rf lib && npm run build:lib && npm run build:types",
     "publish:patch": "npm run before-publish && npm version patch && npm publish",
     "publish:minor": "npm run before-publish && npm version minor && npm publish",
-    "publish:major": "npm run before-publish && npm version major && npm publish"
+    "publish:major": "npm run before-publish && npm version major && npm publish",
+    "test": "npm run build && rm -rf ./tests/temp && cp -R dist ./tests/temp/ && npx serve ./tests"
   }
 }

@@ -10,12 +10,13 @@
                 modules: {
                     main: {
                         js: './main.js',
-                        dep: 'dep'
+                        dep: 'dep',
+                        type: 'immediate'
                     },
                     dep: './src/dep.js'
                 }
             });
-            mod.import('main');
+            mod.import('main').then(console.log).catch(console.error);
         </script>
     </head>
     <body></body>

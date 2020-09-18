@@ -17,6 +17,10 @@ export default func => {
     } = {};
 
     return async (key: string, ...args: unknown[]) => {
+        if (typeof key !== 'string') {
+            return func(key, ...args);
+        }
+
         if (dataMap.hasOwnProperty(key)) {
             const { state, data } = dataMap[key];
             switch (state) {

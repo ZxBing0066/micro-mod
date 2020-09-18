@@ -1,0 +1,24 @@
+.status {
+    display: inline-block;
+    width: 8em;
+    height: 1.5em;
+    line-height: 1.5em;
+    border-radius: 2em;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 1em;
+}
+.status.success {
+    background: green;
+}
+.status.pedding {
+    background: #ffc107;
+}
+.status.error {
+    background: red;
+}
+
+#result > div {
+    margin-top: 1em;
+}
