@@ -1,16 +1,6 @@
 import isArray from './util/isArray';
 import memo from './util/memo';
-import { ModuleInfo, FinalModuleInfo } from './interface';
-
-type Module = string | string[] | ModuleInfo;
-
-interface Config {
-    timeout?: number;
-    baseUrl?: string;
-    modules?: {
-        [module: string]: Module;
-    };
-}
+import { ModuleInfo, FinalModuleInfo, Module, Config } from './interface';
 
 let _config: Config = {
     timeout: 5000

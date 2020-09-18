@@ -16,3 +16,13 @@ export interface FinalModuleInfo {
     dep: string[];
     type?: string | [string, any];
 }
+
+export type Module = string | string[] | ModuleInfo;
+
+export interface Config {
+    timeout?: number;
+    baseUrl?: string;
+    modules?: {
+        [module: string]: Module;
+    };
+}
