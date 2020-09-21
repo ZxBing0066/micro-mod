@@ -36,9 +36,15 @@ const loadModule = promiseOnce(async (moduleKey, moduleInfo) => {
     } catch (error) {
         return;
     }
-    const { js = [], css = [], dep = [] } = moduleInfo;
+    const { js = [], css = [], dep = [], orderExec } = moduleInfo;
     const moduleLoad = async () => {
-        const jsLoad = js.map(f => loadScript(f));
+        const jsLoad = orderExec
+            ? (async () => {
+                  for (let i = 0; i < js.length; i++) {
+                      await loadScript(js[i]);
+                  }
+              })()
+            : js.map(f => loadScript(f));
         const cssLoad = css.map(f => loadCSS(f));
         await Promise.all([...jsLoad, ...cssLoad]);
         if (isModule) updateModule(moduleKey, 2);

@@ -8,6 +8,7 @@ export interface ModuleInfo {
     css?: string | string[];
     dep?: string | string[];
     type?: string | [string, any];
+    orderExec?: boolean;
 }
 export interface FinalModuleInfo {
     key?: string;
@@ -15,6 +16,7 @@ export interface FinalModuleInfo {
     css: string[];
     dep: string[];
     type?: string | [string, any];
+    orderExec?: boolean;
 }
 
 export type Module = string | string[] | ModuleInfo;
