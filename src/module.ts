@@ -40,7 +40,11 @@ export const update = (id, status, data?) => {
     if (moduleStatus >= 6) {
         return;
     }
-    const moduleState = getState(id);
+    let moduleState = getState(id);
+    if (!moduleState) {
+        moduleState = register(id);
+    }
+
     Object.assign(moduleState, { status }, data);
     if (moduleState.status === 6) {
         moduleMap[id] = moduleState.exports;
