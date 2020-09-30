@@ -10,11 +10,13 @@
  */
 import pendingFactory from './util/pendingFactory';
 
-const moduleMap = {};
+const moduleStateMap = {};
 const pendingMap = {};
 
+export const moduleMap = {};
+
 export const register = id => {
-    if (moduleMap.hasOwnProperty(id)) {
+    if (moduleStateMap.hasOwnProperty(id)) {
         throw new Error(`Module: ${id} existed`);
     }
     const moduleState = {
@@ -24,14 +26,14 @@ export const register = id => {
         error: null,
         exports: undefined
     };
-    return (moduleMap[id] = moduleState);
+    return (moduleStateMap[id] = moduleState);
 };
 
-export const getState = id => moduleMap[id];
-export const getExports = id => moduleMap[id]?.exports;
-export const exist = id => moduleMap.hasOwnProperty(id);
-export const defined = id => moduleMap[id]?.status >= 6;
-export const getStatus = id => moduleMap[id]?.status;
+export const getState = id => moduleStateMap[id];
+export const getExports = id => moduleMap[id];
+export const exist = id => moduleStateMap.hasOwnProperty(id);
+export const defined = id => moduleStateMap[id]?.status >= 6;
+export const getStatus = id => moduleStateMap[id]?.status;
 
 export const update = (id, status, data?) => {
     const moduleStatus = getStatus(id);
@@ -40,6 +42,9 @@ export const update = (id, status, data?) => {
     }
     const moduleState = getState(id);
     Object.assign(moduleState, { status }, data);
+    if (moduleState.status === 6) {
+        moduleMap[id] = moduleState.exports;
+    }
     const pendingQueue = pendingMap[id];
     if (pendingQueue) {
         new Array(status).fill(null).forEach((v, i) => {
