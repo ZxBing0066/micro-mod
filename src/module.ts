@@ -44,6 +44,10 @@ export const update = (id, status, data?) => {
     Object.assign(moduleState, { status }, data);
     if (moduleState.status === 6) {
         moduleMap[id] = moduleState.exports;
+        Object.defineProperty(moduleMap, id, {
+            writable: false,
+            configurable: false
+        });
     }
     const pendingQueue = pendingMap[id];
     if (pendingQueue) {
