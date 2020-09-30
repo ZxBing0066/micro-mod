@@ -13,7 +13,7 @@ function load(path, callback) {
 
     function handler(event) {
         if ((el.readyState && !/^c|loade/.test(el.readyState)) || loaded) return;
-        el.onload = el.onreadystatechange = null;
+        el.onload = el.onerror = el.onreadystatechange = null;
         loaded = true;
         scriptStateMap[path] = 2;
         callback(event);

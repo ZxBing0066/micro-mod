@@ -5,7 +5,9 @@ export const load = promiseOnce(path => {
     return new Promise((resolve, reject) => {
         _load(path, event => {
             if (event.type === 'error') {
-                reject(event);
+                const error = new Error(`Load ${path} fail`);
+                (error as any).originEvent = event;
+                reject(error);
             } else {
                 resolve(event);
             }
