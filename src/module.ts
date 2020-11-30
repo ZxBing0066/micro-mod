@@ -34,6 +34,7 @@ export const getExports = id => moduleMap[id];
 export const exist = id => moduleStateMap.hasOwnProperty(id);
 export const defined = id => moduleStateMap[id]?.status >= 6;
 export const getStatus = id => moduleStateMap[id]?.status;
+export const getError = id => moduleStateMap[id]?.error;
 
 export const update = (id, status, data?) => {
     const moduleStatus = getStatus(id);
@@ -64,7 +65,9 @@ export const update = (id, status, data?) => {
 };
 
 export const wait = async (id, status, timeout?: number) => {
-    if (getStatus(id) >= status) {
+    const currentStatus = getStatus(id);
+    if (currentStatus == 7) throw getError(id);
+    if (currentStatus >= status) {
         return;
     }
     if (!pendingMap[id]) pendingMap[id] = {};

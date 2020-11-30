@@ -181,4 +181,31 @@
         const dep = await mod.import('depWithoutBaseUrl');
         is(dep.name, 'depWithoutBaseUrl');
     });
+
+    await test('unknown module', async () => {
+        try {
+            await mod.import('https://test.test/unknown.js');
+            throw new Error('module should not found');
+        } catch (error) {
+            if (error.message === 'module should not found') throw error;
+            console.error(error);
+            return;
+        }
+    });
+
+    await test('throw', async () => {
+        try {
+            mod.config({
+                modules: {
+                    throw: 'throw.js'
+                }
+            });
+            await mod.import('throw');
+            throw new Error('module should throw');
+        } catch (error) {
+            if (error.message === 'module should throw') throw error;
+            console.error(error);
+            return;
+        }
+    });
 })();
