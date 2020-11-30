@@ -2,9 +2,10 @@
 /demos
 /src
 /dist
+/tests
 stats.json
 webpack.config.js
-.babelrc.js
+babel.config.js
 .babelrc.without.polyfill.js
 .eslintignore
 .eslintrc
