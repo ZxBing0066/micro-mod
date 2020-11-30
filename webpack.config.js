@@ -35,7 +35,8 @@ module.exports = {
                         test: /(\.js|\.jsx|\.ts|\.tsx)$/,
                         use: [
                             {
-                                loader: 'babel-loader'
+                                loader: 'babel-loader',
+                                options: require('./babel.config.js')
                             }
                         ],
                         exclude: /node_modules(?![/|\\]@ucloud[/|\\]console-dev-dependences[/|\\]scripts[/|\\]template[/|\\])/

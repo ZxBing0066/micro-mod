@@ -86,4 +86,12 @@ const _export = (moduleName: string, module: any) => {
     }
 };
 
-export { _import as import, _export as export };
+const _throw = (moduleName: string, error: any) => {
+    if (moduleDefined(moduleName)) {
+        console.error(`Warning: Module ${moduleName} already existed, you can't update it to error`);
+    } else {
+        updateModule(moduleName, 7, { error });
+    }
+};
+
+export { _import as import, _export as export, _throw as throw };
