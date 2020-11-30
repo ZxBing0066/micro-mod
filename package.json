@@ -1,6 +1,6 @@
 {
   "name": "@rapiop/mod",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A module loader support umd and own md",
   "main": "lib/index.js",
   "repository": {
