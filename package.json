@@ -52,7 +52,7 @@
     "build:lib": "babel src/ -d lib/ -x \".js\",\".ts\" --config-file \"./babel.config.js\" --source-maps",
     "build:lib-without-polyfill": "babel src/ -d lib-without-polyfill/ -x \".js\",\".ts\" --config-file \"./.babelrc.without.polyfill.js\" --source-maps",
     "build:types": "tsc && tsc --outDir ./lib-without-polyfill",
-    "before-publish": "rm -rf lib && rm -rf lib-without-polyfill && npm run build:lib && npm run build:lib-without-polyfill && npm run build:types",
+    "before-publish": "rm -rf lib && rm -rf lib-without-polyfill && npm run build:lib && npm run build:lib-without-polyfill && npm run build:types && sleep 1",
     "publish:patch": "npm run before-publish && npm version patch && npm publish",
     "publish:minor": "npm run before-publish && npm version minor && npm publish",
     "publish:major": "npm run before-publish && npm version major && npm publish",
