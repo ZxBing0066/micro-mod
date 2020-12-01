@@ -3,6 +3,7 @@
 /src
 /dist
 /tests
+/index.js
 stats.json
 webpack.config.js
 babel.config.js
@@ -14,4 +15,4 @@ babel.config.js
 tsconfig.json
 yarn-error.log
 .browserslist.js
-index.js
+.prettierrc
