@@ -36,6 +36,8 @@ export const defined = id => moduleStateMap[id]?.status >= 6;
 export const getStatus = id => moduleStateMap[id]?.status;
 export const getError = id => moduleStateMap[id]?.error;
 
+const defaultModuleError = new Error('Module export error');
+
 export const update = (id, status, data?) => {
     const moduleStatus = getStatus(id);
     if (moduleStatus >= 6) {
@@ -47,19 +49,22 @@ export const update = (id, status, data?) => {
     }
 
     Object.assign(moduleState, { status }, data);
-    if (moduleState.status === 6) {
+    if (status === 6) {
         moduleMap[id] = moduleState.exports;
         Object.defineProperty(moduleMap, id, {
             writable: false,
             configurable: false
         });
+    } else if (status === 7 && !moduleState.error) {
+        moduleState.error = defaultModuleError;
     }
+
     const pendingQueue = pendingMap[id];
     if (pendingQueue) {
         new Array(status).fill(null).forEach((v, i) => {
-            const status = i + 1;
-            pendingQueue[status]?.forEach(job => job());
-            delete pendingQueue[status];
+            const _status = i + 1;
+            pendingQueue[_status]?.forEach(job => status === 7 ? job.error(moduleState.error) : job.ready());
+            delete pendingQueue[_status];
         });
     }
 };
@@ -73,16 +78,22 @@ export const wait = async (id, status, timeout?: number) => {
     if (!pendingMap[id]) pendingMap[id] = {};
     if (!pendingMap[id][status]) pendingMap[id][status] = [];
     const [pending, ready, error] = pendingFactory();
-    pendingMap[id][status].push(ready);
+    const job = { ready, error };
+    pendingMap[id][status].push(job);
     let timeoutTimer;
     if (timeout) {
         timeoutTimer = setTimeout(() => {
-            pendingMap[id][status] = pendingMap[id][status].filter(job => job !== ready);
+            pendingMap[id][status] = pendingMap[id][status].filter(_job => _job !== job);
             error(new Error(`Wait for module ${id} timeout`));
         }, timeout);
     }
-    await pending;
-    if (timeoutTimer) {
-        clearTimeout(timeoutTimer);
+    try {
+        await pending;
+    } catch (e) {
+        throw e;
+    } finally {
+        if (timeoutTimer) {
+            clearTimeout(timeoutTimer);
+        }
     }
 };
