@@ -12,7 +12,7 @@
 .status.success {
     background: green;
 }
-.status.pedding {
+.status.pending {
     background: #ffc107;
 }
 .status.error {

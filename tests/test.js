@@ -5,11 +5,11 @@
     const writeProcess = name => {
         const wrap = document.createElement('div');
         const status = document.createElement('span');
-        status.className = 'status pedding';
-        status.innerText = 'pedding';
+        status.className = 'status pending';
+        status.innerText = 'pending';
         const message = document.createElement('span');
         message.className = 'message';
-        message.innerText = name + ': pedding';
+        message.innerText = name + ': pending';
         wrap.appendChild(status);
         wrap.appendChild(message);
         resultDOM.appendChild(wrap);
