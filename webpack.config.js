@@ -8,6 +8,7 @@ module.exports = {
         global: ['./index.js', './src/resolver/global.ts'],
         'css-lazy': ['./index.js', './src/resolver/css-lazy.ts'],
         'style-lazy': ['./index.js', './src/resolver/style-lazy.ts'],
+        wasm: ['./index.js', './src/resolver/wasm.ts'],
         all: [
             './index.js',
             './src/resolver/amd.ts',
@@ -36,10 +37,10 @@ module.exports = {
                         use: [
                             {
                                 loader: 'babel-loader',
-                                options: require('./babel.config.js')
+                                options: require('./babelrc.polyfill.js')
                             }
                         ],
-                        exclude: /node_modules(?![/|\\]@ucloud[/|\\]console-dev-dependences[/|\\]scripts[/|\\]template[/|\\])/
+                        exclude: /node_modules[/|\\])/
                     }
                 ]
             }

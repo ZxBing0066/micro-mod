@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mod</title>
+        <script src="http://localhost:8080/wasm.js"></script>
+        <script>
+            mod.config({
+                modules: {
+                    wasm: {
+                        file: './memory.wasm',
+                        type: 'wasm'
+                    }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            (async () => {
+                const bytes = await mod.import('wasm');
+                var memory = new WebAssembly.Memory({ initial: 10, maximum: 100 });
+                const results = await WebAssembly.instantiate(bytes, { js: { mem: memory } });
+                var i32 = new Uint32Array(memory.buffer);
+                for (var i = 0; i < 10; i++) {
+                    i32[i] = i;
+                }
+                console.log(results);
+                var sum = results.instance.exports.accumulate(3, 10);
+                console.log(sum);
+            })();
+        </script>
+    </body>
+</html>

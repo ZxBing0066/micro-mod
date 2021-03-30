@@ -101,7 +101,7 @@ function parseDependencies(code) {
     return deps;
 }
 
-const resolver = promiseOnce(async (moduleName, run) => {
+const resolver = promiseOnce(async (moduleName) => {
     try {
         registerModule(moduleName);
     } catch (e) {

@@ -6,8 +6,7 @@ module.exports = {
             '@babel/preset-env',
             {
                 targets: browserslist,
-                useBuiltIns: 'usage',
-                corejs: '3'
+                useBuiltIns: false
             }
         ],
         ['@babel/preset-typescript']
