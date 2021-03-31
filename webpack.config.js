@@ -1,6 +1,3 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
     entry: {
         mod: './index.js',
@@ -37,14 +34,13 @@ module.exports = {
                         use: [
                             {
                                 loader: 'babel-loader',
-                                options: require('./babelrc.polyfill.js')
+                                options: require('./.babelrc.polyfill.js')
                             }
                         ],
-                        exclude: /node_modules[/|\\])/
+                        exclude: /node_modules/
                     }
                 ]
             }
         ]
-    },
-    plugins: [new HtmlWebpackPlugin()]
+    }
 };
