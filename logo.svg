@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 100">
+    <defs>
+        <g id="shape" fill="#61DAFB" stroke="#61DAFB">
+            <rect width="20" height="20" rx="5" ry="5" fill='none' stroke-width="4" />
+            <circle cx="10" cy="10" r="5" />
+        </g>
+    </defs>
+    <use xlink:href="#shape" x="0" y="0" />
+    <use xlink:href="#shape" x="0" y="25" />
+    <use xlink:href="#shape" x="0" y="50" />
+    <use xlink:href="#shape" x="0" y="75" />
+    <use xlink:href="#shape" x="25" y="0" />
+    <use xlink:href="#shape" x="50" y="0" />
+    <use xlink:href="#shape" x="50" y="25" />
+    <use xlink:href="#shape" x="50" y="50" />
+    <use xlink:href="#shape" x="50" y="75" />
+    <use xlink:href="#shape" x="75" y="0" />
+    <use xlink:href="#shape" x="100" y="0" />
+    <use xlink:href="#shape" x="100" y="25" />
+    <use xlink:href="#shape" x="100" y="50" />
+    <use xlink:href="#shape" x="100" y="75" />
+
+    <use xlink:href="#shape" x="160" y="0" />
+    <use xlink:href="#shape" x="160" y="75" />
+    <use xlink:href="#shape" x="185" y="75" />
+    <use xlink:href="#shape" x="185" y="0" />
+    <use xlink:href="#shape" x="210" y="0" />
+    <use xlink:href="#shape" x="210" y="75" />
+    <use xlink:href="#shape" x="150" y="25" />
+    <use xlink:href="#shape" x="150" y="50" />
+    <use xlink:href="#shape" x="220" y="25" />
+    <use xlink:href="#shape" x="220" y="50" />
+
+    <use xlink:href="#shape" x="270" y="0" />
+    <use xlink:href="#shape" x="270" y="25" />
+    <use xlink:href="#shape" x="270" y="50" />
+    <use xlink:href="#shape" x="270" y="75" />
+    <use xlink:href="#shape" x="295" y="75" />
+    <use xlink:href="#shape" x="295" y="0" />
+    <use xlink:href="#shape" x="320" y="0" />
+    <use xlink:href="#shape" x="320" y="75" />
+    <use xlink:href="#shape" x="330" y="25" />
+    <use xlink:href="#shape" x="330" y="50" />
+</svg>
