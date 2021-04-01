@@ -1,3 +1,5 @@
+![logo](_media/logo.svg)
+
 # MOD
 
 > A simple, easy to use web module loader for any type of module.
