@@ -1,12 +1,10 @@
 ![logo](_media/logo.svg)
 
-# MOD
-
-> A simple, easy to use web module loader for any type of module.
+> A simple, easy to use web module loader for any type of modules.
 
 -   Simple and lightweight
--   No statically built html files
--   Multiple themes
+-   Non-invasive for your project
+-   Use like es module
 
 [GitHub](https://github.com/rapiop/mod)
 [NPM](https://www.npmjs.com/package/@rapiop/mod)

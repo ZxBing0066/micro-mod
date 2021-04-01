@@ -1,21 +1,11 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
     entry: {
-        mod: './index.js',
-        amd: ['./index.js', './src/resolver/amd.ts'],
-        global: ['./index.js', './src/resolver/global.ts'],
-        'css-lazy': ['./index.js', './src/resolver/css-lazy.ts'],
-        'style-lazy': ['./index.js', './src/resolver/style-lazy.ts'],
-        wasm: ['./index.js', './src/resolver/wasm.ts'],
-        all: [
-            './index.js',
-            './src/resolver/amd.ts',
-            './src/resolver/global.ts',
-            './src/resolver/css-lazy.ts',
-            './src/resolver/style-lazy.ts'
-        ]
+        mod: './index.js'
     },
     output: {
-        filename: '[name].js'
+        filename: process.env.POLYFILL ? '[name].polyfill.min.js' : '[name].min.js'
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
@@ -25,6 +15,7 @@ module.exports = {
     devServer: {
         contentBase: './dist'
     },
+    plugins: [...(process.env.ANALYZER ? [new BundleAnalyzerPlugin()] : [])],
     module: {
         rules: [
             {
@@ -34,7 +25,9 @@ module.exports = {
                         use: [
                             {
                                 loader: 'babel-loader',
-                                options: require('./.babelrc.polyfill.js')
+                                options: process.env.POLYFILL
+                                    ? require('./.babelrc.polyfill.js')
+                                    : require('./babel.config.js')
                             }
                         ],
                         exclude: /node_modules/
