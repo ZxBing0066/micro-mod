@@ -9,12 +9,11 @@ import {
     defined as moduleDefined,
     wait as waitModule
 } from './module';
+import * as module from './module';
+import * as config from './config';
 import { ModuleInfo } from './interface';
 
 const moduleResolverMap = {};
-export const registerModuleResolver = (type, resolver) => {
-    moduleResolverMap[type] = resolver;
-};
 
 const loadModule = promiseOnce(async (moduleKey, moduleInfo) => {
     if (!moduleInfo) return;
@@ -95,3 +94,14 @@ const _throw = (moduleName: string, error: any) => {
 };
 
 export { _import as import, _export as export, _throw as throw };
+
+export const registerModuleResolver = resolverGenerator => {
+    resolverGenerator({
+        module,
+        config,
+        import: _import,
+        export: _export,
+        throw: _throw,
+        register: (type, resolver) => (moduleResolverMap[type] = resolver)
+    });
+};

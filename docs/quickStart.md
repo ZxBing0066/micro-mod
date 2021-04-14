@@ -1,6 +1,25 @@
-# @rapiop/mod
+# 快速上手
 
-一个简单、轻量的模块加载、管理库。
+## 介绍
+
+一个简单、轻量、无侵入的模块加载、管理库。
+
+## 适用场景
+
+### 引入外部包
+
+```js
+import mod from '@rapiop/mod';
+// 导入 amd 支持
+import '@rapiop/mod/resolver/amd';
+mod.config({
+    modules: {
+        react: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.production.min.js',
+        'react-dom': 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js'
+    }
+});
+
+```
 
 ## 安装
 

@@ -2,7 +2,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
     entry: {
-        mod: './index.js'
+        mod: './entry/index',
+        'resolver-amd': './entry/amd',
+        'resolver-global': './entry/global',
+        'resolver-css-lazy': './entry/css-lazy',
+        'resolver-style-lazy': './entry/style-lazy',
+        'resolver-wasm': './entry/wasm'
     },
     output: {
         filename: process.env.POLYFILL ? '[name].polyfill.min.js' : '[name].min.js'
@@ -13,7 +18,10 @@ module.exports = {
     mode: process.env.NODE_ENV,
     devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : 'source-map',
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
     },
     plugins: [...(process.env.ANALYZER ? [new BundleAnalyzerPlugin()] : [])],
     module: {

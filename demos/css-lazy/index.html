@@ -4,7 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>mod</title>
-        <script src="http://localhost:8080/css-lazy.js"></script>
+        <script src="http://localhost:8080/mod.min.js"></script>
+        <script src="http://localhost:8080/resolver-css-lazy.min.js"></script>
         <script>
             mod.config({
                 modules: {
@@ -26,6 +27,7 @@
                 });
                 setTimeout(() => {
                     theme.unuse();
+                    console.log('theme unused');
                 }, 5000);
             });
         </script>

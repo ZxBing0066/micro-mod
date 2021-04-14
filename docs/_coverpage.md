@@ -3,7 +3,7 @@
 > A simple, easy to use web module loader for any type of modules.
 
 -   Simple and lightweight
--   Non-invasive for your project
+-   Non-invasive to your project
 -   Use like es module
 
 [GitHub](https://github.com/rapiop/mod)
