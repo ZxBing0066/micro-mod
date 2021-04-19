@@ -10,6 +10,7 @@
     </head>
     <body>
         <div id="app">Please wait...</div>
+        <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
         <script>
             window.$docsify = {
                 name: '',
@@ -20,7 +21,12 @@
                 coverpage: {
                     '/': '_coverpage.md',
                     '/zh-cn/': '_coverpage.md'
-                }
+                },
+                plugins: [
+                    EditOnGithubPlugin.create('https://github.com/rapiop/mod/blob/master/docs/', null, function (file) {
+                        return '编辑';
+                    })
+                ]
             };
         </script>
         <!-- Docsify v4 -->

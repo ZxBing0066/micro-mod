@@ -1,30 +1,29 @@
--   Getting started
+-   [Getting started](quickStart.md)
 
     -   [Quick Start](quickStart.md)
     -   [Background](background.md)
     -   [API](api.md)
-    -   Use from CDN
-    -   Advance
+    -   [Advance](advance.md)
 
--   Usage
+-   [Usage](usage.md)
 
-    -   主题切换
+    -   [主题切换](usage/theme.md)
     -   项目间切换样式加载/卸载防冲突
-    -   模块加载/使用统计
+    -   [模块加载/使用统计](usage/module.md)
 
--   Resolver
+-   [Resolver](resolver.md)
 
-    -   amd
-    -   global
-    -   css-lazy
-    -   style-lazy
-    -   wasm
+    -   [amd](resolver/amd.md)
+    -   [global](resolver/global.md)
+    -   [css-lazy](resolver/css-lazy.md)
+    -   [style-lazy](resolver/style-lazy.md)
+    -   [wasm](resolver/wasm.md)
 
 -   [Develop](develop.md)
 
 -   [GitHub](https://github.com/rapiop/mod)
 
--   Translations
+<!-- -   Translations
 
     -   [EN](/)
-    -   [CN](/zh-cn/)
+    -   [CN](/zh-cn/) -->
