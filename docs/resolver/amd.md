@@ -1,6 +1,8 @@
 # amd resolver
 
-## 使用
+`amd resolver` 能让 `mod` 支持 `amd` 模块，适用于使用常见的 `amd`、`umd` 包。
+
+## 注册解析器
 
 ### npm 包
 
@@ -29,4 +31,27 @@ mod.registerModuleResolver(amdResolver);
         <div id="app"></div>
     </body>
 </html>
+```
+
+## 使用
+
+```js
+// 注册 amd 模块
+mod.config({
+    modules: {
+        react: {
+            js: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js',
+            type: 'amd'
+        },
+        'react-dom' {
+            js: 'https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js',
+            type: 'amd'
+        }
+    }
+});
+
+// 引用模块
+mod.import(['react', 'react-dom']).then(([React, ReactDOM]) => {
+    console.log(React, ReactDOM);
+});
 ```
