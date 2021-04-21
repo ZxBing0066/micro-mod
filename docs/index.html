@@ -37,5 +37,60 @@
                 navigator.serviceWorker.register('sw.js');
             }
         </script>
+        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@0.1/dist/mod.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@0.1/dist/resolver-amd.min.js"></script>
+        <div id="bg"></div>
+        <script>
+            mod.config({
+                modules: {
+                    react: {
+                        js: '//cdn.jsdelivr.net/npm/react@16/umd/react.production.min.js',
+                        type: 'amd'
+                    },
+                    'react-dom': {
+                        js: '//cdn.jsdelivr.net/npm/react-dom@16/umd/react-dom.production.min.js',
+                        type: 'amd',
+                        dep: 'react'
+                    },
+                    'raf-manager': {
+                        js: '//cdn.jsdelivr.net/npm/raf-manager@0.3.0/build/RAFManager.min.js',
+                        type: 'amd'
+                    },
+                    'proton-engine': {
+                        js: '//cdn.jsdelivr.net/npm/proton-engine@4.2.1/build/proton.min.js',
+                        type: 'amd'
+                    },
+                    'particales-bg': {
+                        js: '//cdn.jsdelivr.net/npm/particles-bg@2.5.5/dist/index.min.js',
+                        type: 'amd',
+                        dep: ['react', 'raf-manager', 'proton-engine']
+                    }
+                }
+            });
+            mod.import(['react', 'react-dom', 'particales-bg']).then(([React, ReactDOM, ParticlesBg]) => {
+                ReactDOM.render(
+                    React.createElement(ParticlesBg, {
+                        type: 'custom',
+                        config: {
+                            num: [4, 7],
+                            rps: 0.1,
+                            radius: [5, 40],
+                            life: [1.5, 3],
+                            v: [2, 3],
+                            tha: [-50, 50],
+                            alpha: [0.6, 0],
+                            scale: [0.1, 0.9],
+                            body: icon,
+                            position: 'all',
+                            //color: ["random", "#ff0000"],
+                            cross: 'dead',
+                            random: 10
+                        },
+                        bg: true
+                    }),
+                    document.querySelector('#bg')
+                );
+            });
+        </script>
     </body>
 </html>

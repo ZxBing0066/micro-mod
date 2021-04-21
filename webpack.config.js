@@ -5,6 +5,7 @@ module.exports = {
         mod: './entry/index',
         'resolver-amd': './entry/amd',
         'resolver-global': './entry/global',
+        'resolver-cjs': './entry/cjs',
         'resolver-css-lazy': './entry/css-lazy',
         'resolver-style-lazy': './entry/style-lazy',
         'resolver-wasm': './entry/wasm'

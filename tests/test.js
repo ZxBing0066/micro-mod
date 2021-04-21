@@ -126,20 +126,19 @@
             throw new Error('Wrong global named module loaded');
         }
     });
-
-    test('amd support', async () => {
-        mod.config({
-            modules: {
-                react: {
-                    js: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.development.js',
-                    type: 'amd'
-                },
-                'react-dom': {
-                    js: 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.development.js',
-                    type: 'amd'
-                }
+    mod.config({
+        modules: {
+            react: {
+                js: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.development.js',
+                type: 'amd'
+            },
+            'react-dom': {
+                js: 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.development.js',
+                type: 'amd'
             }
-        });
+        }
+    });
+    test('amd support', async () => {
         const [React, ReactDOM] = await mod.import(['react', 'react-dom']);
         if (React.version !== '16.13.1' || typeof React.lazy !== 'function') throw new Error('Wrong React loaded');
         if (ReactDOM.version !== '16.13.1' || typeof ReactDOM.render !== 'function')
@@ -154,6 +153,23 @@
             el
         );
         if (el.querySelector('div').innerText !== 'React success') throw new Error('React render wrong');
+    });
+
+    test('cjs support', async () => {
+        mod.config({
+            modules: {
+                cjs: {
+                    js: './src/cjs.js',
+                    dep: ['react', 'react-dom'],
+                    type: 'cjs'
+                }
+            }
+        });
+        const cjs = await mod.import('cjs');
+        console.error(cjs);
+        if (typeof cjs.reactVersion !== 'string' || typeof cjs.reactDOMVersion !== 'string') {
+            throw new Error('Cjs support test fail');
+        }
     });
 
     await test('config timeout', async () => {
