@@ -42,7 +42,7 @@ export default ({ module, config, register, import: _import }) => {
     });
 })();`;
             const scriptTag = document.createElement('script');
-            scriptTag.innerText = execScriptContent;
+            scriptTag.innerHTML = execScriptContent;
             scriptTag.setAttribute('data-mod-cjs', moduleName);
             document.querySelector('head').appendChild(scriptTag);
         } catch (error) {

@@ -37,8 +37,9 @@
                 navigator.serviceWorker.register('sw.js');
             }
         </script>
-        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@0.1/dist/mod.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@0.1/dist/resolver-amd.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@1/dist/mod.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@1/dist/resolver-amd.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/@rapiop/mod@1/dist/resolver-cjs.min.js"></script>
         <div id="bg"></div>
         <script>
             mod.config({
@@ -62,7 +63,7 @@
                     },
                     'particales-bg': {
                         js: '//cdn.jsdelivr.net/npm/particles-bg@2.5.5/dist/index.min.js',
-                        type: 'amd',
+                        type: 'cjs',
                         dep: ['react', 'raf-manager', 'proton-engine']
                     }
                 }
