@@ -62,9 +62,9 @@
     "build:types": "tsc && tsc --outDir ./lib-polyfill",
     "before-publish": "rm -rf dist && npm run build && npm run build:polyfill && rm -rf lib && rm -rf lib-polyfill && npm run build:lib && npm run build:lib-polyfill && npm run build:types",
     "ci": "npm run before-publish",
-    "publish:patch": "npm run before-publish && npm version patch && npm publish",
-    "publish:minor": "npm run before-publish && npm version minor && npm publish",
-    "publish:major": "npm run before-publish && npm version major && npm publish",
+    "publish:patch": "npm version patch && git push --follow-tags",
+    "publish:minor": "npm version minor && git push --follow-tags",
+    "publish:major": "npm version major && git push --follow-tags",
     "test": "npm run build && rm -rf ./tests/temp && cp -R dist ./tests/temp/ && npx serve ./tests",
     "test:ci": "npm run build && npm run build:lib"
   }
