@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/%40rapiop%2Fmod.svg)](https://badge.fury.io/js/%40rapiop%2Fmod)
 [![GitHub license](https://img.shields.io/github/license/rapiop/mod.svg)](https://github.com/rapiop/mod/blob/master/LICENSE)
 [![GitHub tag](https://img.shields.io/github/tag/rapiop/mod.svg)](https://GitHub.com/rapiop/mod/tags/)
+[![Publish workflow](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml)
 
 ## 安装
 
