@@ -1,90 +1,65 @@
-# @rapiop/mod
+# MOD
 
-A custom module loader support javascript modules and css modules.
+[![npm version](https://badge.fury.io/js/%40rapiop%2Fmod.svg)](https://badge.fury.io/js/%40rapiop%2Fmod)
+[![GitHub license](https://img.shields.io/github/license/rapiop/mod.svg)](https://github.com/rapiop/mod/blob/master/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/rapiop/mod.svg)](https://GitHub.com/rapiop/mod/tags/)
 
-## import
+## 安装
 
--   mod.import(url)
-
-从地址拉取文件并执行文件，由于无模块名，适用于入口文件，或执行文件，加载完成后即返回
-
--   mod.import(moduleName)
-
-从 config 中查找对应的 module，并进行加载，会等待模块注册完成，如果模块文件及其依赖文件都加载完成后一定时间（默认 5s）内未返回，则抛出 timeout 错误。
-
--   mod.import((url|moduleName)[])
-
-批量加载模块/脚本
-
-## export
-
-mod.export(moduleName, module)
-
-注册模块，自带的模块语法需要手动导出模块，可以支持单文件多模块、同步加载延迟导出模块等。
-
--   单文件中同时导出多个模块
-
-react-module
-
-```js
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-
-mod.export('react', React);
-mod.export('prop-types', PropTypes);
-mod.export('react-dom', ReactDOM);
+```bash
+npm install @rapiop/mod
 ```
 
-usage
+## 引用
 
 ```js
+import mod from '@rapiop/mod';
+// 导入 amd 支持
+import amdResolver from '@rapiop/mod/lib/resolver/amd';
+// 注册模块类型解析器
+mod.registerModuleResolver(amdResolver);
+```
+
+## 使用
+
+```js
+// 添加模块配置
 mod.config({
-    react: './react-module.js',
-    'prop-types': {
-        dep: ['react']
-    },
-    'react-dom': {
-        dep: ['react']
+    modules: {
+        react: {
+            type: 'amd',
+            js: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.production.min.js'
+        },
+        'react-dom': {
+            type: 'amd',
+            js: 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js',
+            dep: 'react'
+        }
     }
 });
 
-const React = await mod.import('react');
-const [PropTypes, ReactDOM] = mod.import(['prop-types', 'react-dom']);
-```
-
--   延迟导出
-
-react
-
-```js
-import React from 'react';
-
-mod.export('react', React);
-```
-
-react-dom
-
-```js
 (async () => {
-    // 由于 react-dom 依赖 react，所以这里需要等待 react 加载完成
-    await mod.import('react');
-    const ReactDOM = require('react-dom');
-    mod.export('react-dom', ReactDOM);
+    // 加载模块
+    const [React, ReactDOM] = await mod.import(['react', 'react-dom']);
+    // 使用模块
+    ReactDOM.render(React.createElement('button', {}, 'test'), document.getElementById('app'));
 })();
 ```
 
-usage
+## 使用教程
 
-```js
-mod.config({
-    react: './react.js',
-    'react-dom': {
-        js: './react-dom.js',
-        // 声明依赖可以让 react-dom 加载时提前一并加载 react，加快加载速度
-        dep: ['react']
-    }
-});
-
-const ReactDOM = await mod.import('react-dom');
-```
+-   [官网地址](https://rapiop.github.io/mod/)
+-   [快速上手](https://rapiop.github.io/mod/#/quickStart)
+-   [背景](https://rapiop.github.io/mod/#/background)
+-   [API 定义](https://rapiop.github.io/mod/#/api)
+-   [Resolver](https://rapiop.github.io/mod/#/resolver)
+    -   [amd](https://rapiop.github.io/mod/#/resolver/amd)
+    -   [cjs](https://rapiop.github.io/mod/#/resolver/cjs)
+    -   [global](https://rapiop.github.io/mod/#/resolver/global)
+    -   [css-lazy](https://rapiop.github.io/mod/#/resolver/css-lazy)
+    -   [style-lazy](https://rapiop.github.io/mod/#/resolver/style-lazy)
+    -   [wasm](https://rapiop.github.io/mod/#/resolver/wasm)
+-   [开发](https://rapiop.github.io/mod/#/develop)
+-   [使用案例](https://rapiop.github.io/mod/#/usage)
+    -   [主题切换](https://rapiop.github.io/mod/#/usage/theme)
+    -   [按需加载 polyfill](https://rapiop.github.io/mod/#/usage/polyfill)
