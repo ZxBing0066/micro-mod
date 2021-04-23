@@ -1,3 +1,3 @@
-import wasmResolverGenerator from '../src/resolver/wasm';
+import wasmResolverGenerator from '../resolver/wasm';
 
 (<any>window).mod.registerModuleResolver(wasmResolverGenerator);

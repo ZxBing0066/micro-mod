@@ -1,3 +1,3 @@
-import styleLazyResolverGenerator from '../src/resolver/style-lazy';
+import styleLazyResolverGenerator from '../resolver/style-lazy';
 
 (<any>window).mod.registerModuleResolver(styleLazyResolverGenerator);

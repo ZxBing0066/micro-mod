@@ -1,3 +1,3 @@
-import globalResolverGenerator from '../src/resolver/global';
+import globalResolverGenerator from '../resolver/global';
 
 (<any>window).mod.registerModuleResolver(globalResolverGenerator);

@@ -7,6 +7,6 @@
         "isolatedModules": true,
         "outDir": "./lib"
     },
-    "include": ["src/**/*", "entry"],
+    "include": ["src/**/*"],
     "exclude": ["code", "lib", "dist", "node_modules"]
 }

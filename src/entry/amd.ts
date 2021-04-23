@@ -1,3 +1,3 @@
-import amdResolverGenerator from '../src/resolver/amd';
+import amdResolverGenerator from '../resolver/amd';
 
 (<any>window).mod.registerModuleResolver(amdResolverGenerator);

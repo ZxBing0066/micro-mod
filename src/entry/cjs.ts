@@ -1,3 +1,3 @@
-import cjsResolverGenerator from '../src/resolver/cjs';
+import cjsResolverGenerator from '../resolver/cjs';
 
 (<any>window).mod.registerModuleResolver(cjsResolverGenerator);
