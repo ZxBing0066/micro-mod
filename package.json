@@ -61,6 +61,7 @@
     "build:lib-polyfill": "babel src/ -d lib-polyfill/ -x \".js\",\".ts\" --config-file \"./.babelrc.polyfill.js\" --source-maps",
     "build:types": "tsc && tsc --outDir ./lib-polyfill",
     "before-publish": "rm -rf dist && npm run build && npm run build:polyfill && rm -rf lib && rm -rf lib-polyfill && npm run build:lib && npm run build:lib-polyfill && npm run build:types",
+    "ci": "npm run before-publish",
     "publish:patch": "npm run before-publish && npm version patch && npm publish",
     "publish:minor": "npm run before-publish && npm version minor && npm publish",
     "publish:major": "npm run before-publish && npm version major && npm publish",
