@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/%40rapiop%2Fmod.svg)](https://badge.fury.io/js/%40rapiop%2Fmod)
 [![GitHub license](https://img.shields.io/github/license/rapiop/mod.svg)](https://github.com/rapiop/mod/blob/master/LICENSE)
 [![GitHub tag](https://img.shields.io/github/tag/rapiop/mod.svg)](https://GitHub.com/rapiop/mod/tags/)
-[![Publish workflow](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml)
+[![Publish workflow](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/rapiop/mod/actions/workflows/npm-publish.yml) [![Join the chat at https://gitter.im/rapiop-mod/community](https://badges.gitter.im/rapiop-mod/community.svg)](https://gitter.im/rapiop-mod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## 安装
 
