@@ -1,12 +1,10 @@
 import promiseOnce from '../util/promiseOnce';
 
-export default ({ module, config, register, import: _import }) => {
-    const { moduleInfoResolver } = config;
+export default ({ module, register, import: _import }) => {
     const { update: updateModule } = module;
-    const resolver = promiseOnce(async moduleName => {
+    const resolver = promiseOnce(async (moduleName, moduleInfo) => {
         try {
             if (!WebAssembly) throw new Error(`The browser don't support WebAssembly`);
-            const moduleInfo = moduleInfoResolver(moduleName);
             let { file } = moduleInfo;
             if (Array.isArray(file)) {
                 console.warn('Wasm only support single file module');

@@ -1,8 +1,7 @@
 import promiseOnce from '../util/promiseOnce';
 import { load } from '../loader/fileLoader';
 
-export default ({ module, config, register, import: _import }) => {
-    const { moduleInfoResolver } = config;
+export default ({ module, register, import: _import }) => {
     const { register: registerModule, update: updateModule, wait: waitModule } = module;
 
     const head = document.head || document.getElementsByTagName('head')[0];
@@ -12,14 +11,13 @@ export default ({ module, config, register, import: _import }) => {
         return el;
     };
 
-    const resolver = promiseOnce(async moduleName => {
+    const resolver = promiseOnce(async (moduleName, moduleInfo) => {
         try {
             registerModule(moduleName);
         } catch (e) {
             await waitModule(moduleName, 6);
         }
         try {
-            const moduleInfo = moduleInfoResolver(moduleName);
             const { css, dep } = moduleInfo;
 
             if (!css?.length) {

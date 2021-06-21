@@ -30,40 +30,45 @@ const resolveModule = (module: Module): ModuleInfo => {
     }
 };
 
-export const moduleInfoResolver = memo(
-    (module: Module): FinalModuleInfo => {
-        if (!module) return;
-        const { modules = {}, baseUrl = '' } = _config;
-        let moduleInfo: ModuleInfo;
-        if (typeof module === 'string') {
-            if (modules.hasOwnProperty(module)) {
-                moduleInfo = resolveModule(modules[module]);
-            } else {
-                moduleInfo = {
-                    js: [module],
-                    type: 'immediate'
-                };
-            }
-            moduleInfo.key = module;
-        } else if (isFiles(moduleInfo)) {
-            moduleInfo = {
-                key: moduleInfo.join('|'),
-                js: moduleInfo,
-                type: 'immediate'
-            };
+let i = 0;
+const uid = () => '__mod_inner_anonymous_module_id_' + i++;
+
+export const moduleInfoResolver = memo((module: Module): FinalModuleInfo => {
+    if (!module) return;
+    const { modules = {}, baseUrl = '' } = _config;
+    let moduleInfo: ModuleInfo;
+    if (typeof module === 'string') {
+        if (modules.hasOwnProperty(module)) {
+            moduleInfo = resolveModule(modules[module]);
         } else {
             moduleInfo = {
-                ...module,
+                js: [module],
                 type: 'immediate'
             };
         }
-        const { js, css, dep } = moduleInfo as ModuleInfo;
-        moduleInfo.js = string2Array(js).map(file => (absolutePath.test(file) ? file : baseUrl + file));
-        moduleInfo.css = string2Array(css).map(file => (absolutePath.test(file) ? file : baseUrl + file));
-        moduleInfo.dep = string2Array(dep);
-        return moduleInfo as FinalModuleInfo;
+        moduleInfo.key = module;
+    } else if (isFiles(moduleInfo)) {
+        moduleInfo = {
+            key: moduleInfo.join('|'),
+            js: moduleInfo,
+            type: 'immediate'
+        };
+    } else {
+        moduleInfo = {
+            type: 'immediate',
+            ...module
+        };
+        if (!moduleInfo.key && moduleInfo.type !== 'immediate') {
+            const key = uid();
+            moduleInfo.key = key;
+        }
     }
-);
+    const { js, css, dep } = moduleInfo as ModuleInfo;
+    moduleInfo.js = string2Array(js).map(file => (absolutePath.test(file) ? file : baseUrl + file));
+    moduleInfo.css = string2Array(css).map(file => (absolutePath.test(file) ? file : baseUrl + file));
+    moduleInfo.dep = string2Array(dep);
+    return moduleInfo as FinalModuleInfo;
+});
 
 const config = (config: Config = {}) => {
     _config = {

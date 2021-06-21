@@ -26,7 +26,7 @@ const loadModule = promiseOnce(async (moduleKey, moduleInfo) => {
             [type, options] = type;
         }
         if (moduleResolverMap[type]) {
-            return await moduleResolverMap[type](moduleKey, options);
+            return await moduleResolverMap[type](moduleKey, moduleInfo, options);
         }
     }
 
@@ -74,7 +74,9 @@ const _import = async (modules: module | module[] = []): Promise<unknown | unkno
     await Promise.all(
         moduleInfos.map((moduleInfo, i) => moduleInfo.type !== 'immediate' && waitModule(moduleInfo.key, 6, timeout))
     );
-    return isSingle ? getModuleExports(modules[0]) : modules.map(getModuleExports);
+    return isSingle
+        ? getModuleExports(moduleInfos[0].key)
+        : moduleInfos.map(moduleInfo => getModuleExports(moduleInfo.key));
 };
 
 const _export = (moduleName: string, module: any) => {

@@ -166,11 +166,19 @@
             }
         });
         const cjs = await mod.import('cjs');
-        console.error(cjs);
+        console.info(cjs);
         if (typeof cjs.reactVersion !== 'string' || typeof cjs.reactDOMVersion !== 'string') {
             throw new Error('Cjs support test fail');
         }
     });
+
+    test('raw support', async () => {
+        const rawContent = await mod.import({ file: './src/raw.txt', type: 'raw' });
+        if (rawContent !== 'This is a raw text file.') {
+            console.error(rawContent);
+            throw new Error('Raw content error')
+        }
+    })
 
     await test('config timeout', async () => {
         mod.config({

@@ -8,8 +8,7 @@ const specialDepMap = {
     exports: 1
 };
 
-export default ({ module, config, register, import: _import }) => {
-    const { moduleInfoResolver } = config;
+export default ({ module, register, import: _import }) => {
     const {
         register: registerModule,
         update: updateModule,
@@ -90,7 +89,8 @@ export default ({ module, config, register, import: _import }) => {
         }
     };
 
-    const REQUIRE_RE = /"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^\/\r\n])+\/(?=[^\/])|\/\/.*|\.\s*require|(?:^|[^$])\brequire\s*\(\s*(["'])(.+?)\1\s*\)/g;
+    const REQUIRE_RE =
+        /"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^\/\r\n])+\/(?=[^\/])|\/\/.*|\.\s*require|(?:^|[^$])\brequire\s*\(\s*(["'])(.+?)\1\s*\)/g;
     const SLASH_RE = /\\\\/g;
 
     function parseDependencies(code) {
@@ -103,14 +103,13 @@ export default ({ module, config, register, import: _import }) => {
         return deps;
     }
 
-    const resolver = promiseOnce(async moduleName => {
+    const resolver = promiseOnce(async (moduleName, moduleInfo) => {
         try {
             registerModule(moduleName);
         } catch (e) {
             await waitModule(moduleName, 6);
         }
         try {
-            const moduleInfo = moduleInfoResolver(moduleName);
             const { js } = moduleInfo;
             const script = js?.[0];
             if (!script) {

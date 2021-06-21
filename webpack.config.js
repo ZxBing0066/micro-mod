@@ -8,7 +8,8 @@ module.exports = {
         'resolver-cjs': './src/entry/cjs',
         'resolver-css-lazy': './src/entry/css-lazy',
         'resolver-style-lazy': './src/entry/style-lazy',
-        'resolver-wasm': './src/entry/wasm'
+        'resolver-wasm': './src/entry/wasm',
+        'resolver-raw': './src/entry/raw'
     },
     output: {
         filename: process.env.POLYFILL ? '[name].polyfill.min.js' : '[name].min.js'

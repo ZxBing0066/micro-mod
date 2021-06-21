@@ -1,18 +1,16 @@
 import { load } from '../loader/fileLoader';
 import promiseOnce from '../util/promiseOnce';
 
-export default ({ module, config, register, import: _import }) => {
-    const { moduleInfoResolver } = config;
+export default ({ module, register, import: _import }) => {
     const { register: registerModule, update: updateModule, wait: waitModule } = module;
 
-    const resolver = promiseOnce(async moduleName => {
+    const resolver = promiseOnce(async (moduleName, moduleInfo) => {
         try {
             registerModule(moduleName);
         } catch (e) {
             await waitModule(moduleName, 6);
         }
         try {
-            const moduleInfo = moduleInfoResolver(moduleName);
             const { js, dep } = moduleInfo;
             const script = js?.[0];
             if (!script) {
