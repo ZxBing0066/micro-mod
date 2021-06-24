@@ -16,7 +16,11 @@ const get = (src: string): Promise<XMLHttpRequest> => {
     return new Promise((resolve, reject) => {
         const oReq = new XMLHttpRequest();
         oReq.addEventListener('load', e => {
-            resolve(oReq);
+            if (oReq.status >= 200 && oReq.status < 300) {
+                resolve(oReq);
+            } else {
+                reject(new Error('Request failed with status code ' + oReq.status));
+            }
         });
         oReq.addEventListener('abort', e => {
             reject(e);

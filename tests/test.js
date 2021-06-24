@@ -176,9 +176,17 @@
         const rawContent = await mod.import({ file: './src/raw.txt', type: 'raw' });
         if (rawContent !== 'This is a raw text file.') {
             console.error(rawContent);
-            throw new Error('Raw content error')
+            throw new Error('Raw content error');
         }
-    })
+    });
+
+    test('raw fail support', async () => {
+        try {
+            const rawContent = await mod.import({ file: './src/raw-none.txt', type: 'raw' });
+            console.error(rawContent);
+            throw new Error('Should be fail');
+        } catch (error) {}
+    });
 
     await test('config timeout', async () => {
         mod.config({
