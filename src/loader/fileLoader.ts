@@ -1,4 +1,5 @@
 import { AnyFunction } from '../interface';
+import get from '../util/get';
 import pendingFactory from '../util/pendingFactory';
 
 const fileCacheMap: {
@@ -11,30 +12,6 @@ const fileCacheMap: {
 const fileQueueMap: {
     [src: string]: { ready: AnyFunction; error: AnyFunction }[];
 } = {};
-
-const get = (src: string): Promise<XMLHttpRequest> => {
-    return new Promise((resolve, reject) => {
-        const oReq = new XMLHttpRequest();
-        oReq.addEventListener('load', e => {
-            if (oReq.status >= 200 && oReq.status < 300) {
-                resolve(oReq);
-            } else {
-                reject(new Error('Request failed with status code ' + oReq.status));
-            }
-        });
-        oReq.addEventListener('abort', e => {
-            reject(e);
-        });
-        oReq.addEventListener('error', e => {
-            reject(e);
-        });
-        oReq.addEventListener('timeout', e => {
-            reject(e);
-        });
-        oReq.open('GET', src);
-        oReq.send();
-    });
-};
 
 async function load(filePath) {
     if (filePath in fileCacheMap) {

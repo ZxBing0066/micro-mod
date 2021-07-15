@@ -27,6 +27,8 @@ const loadModule = promiseOnce(async (moduleKey, moduleInfo) => {
         }
         if (moduleResolverMap[type]) {
             return await moduleResolverMap[type](moduleKey, moduleInfo, options);
+        } else {
+            throw new Error(`There is no resolver for type: ${type}`);
         }
     }
 

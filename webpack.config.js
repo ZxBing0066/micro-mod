@@ -9,7 +9,8 @@ module.exports = {
         'resolver-css-lazy': './src/entry/css-lazy',
         'resolver-style-lazy': './src/entry/style-lazy',
         'resolver-wasm': './src/entry/wasm',
-        'resolver-raw': './src/entry/raw'
+        'resolver-raw': './src/entry/raw',
+        'resolver-json': './src/entry/json'
     },
     output: {
         filename: process.env.POLYFILL ? '[name].polyfill.min.js' : '[name].min.js'

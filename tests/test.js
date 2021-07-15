@@ -188,6 +188,33 @@
         } catch (error) {}
     });
 
+    test('json support', async () => {
+        const jsonContent = await mod.import({ file: './src/json.json', type: 'json' });
+        if (jsonContent.a.b.c !== 'foo') {
+            console.error(jsonContent);
+            throw new Error('Raw content error');
+        }
+    });
+
+    test('json fail support', async () => {
+        try {
+            const jsonContent = await mod.import({ file: './src/json-wrong.json', type: 'json' });
+            console.error(jsonContent);
+            throw new Error('Should be fail');
+        } catch (error) {}
+    });
+
+    test('unknown type', async () => {
+        try {
+            await mod.import({ file: './src/unknown', type: 'unknown' });
+            throw new Error('Should be fail');
+        } catch (error) {
+            if (error + '' !== 'Error: There is no resolver for type: unknown') {
+                throw error;
+            }
+        }
+    });
+
     await test('config timeout', async () => {
         mod.config({
             timeout: 1000
