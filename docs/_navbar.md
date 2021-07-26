@@ -16,8 +16,10 @@
     -   [amd](resolver/amd.md)
     -   [cjs](resolver/cjs.md)
     -   [global](resolver/global.md)
+    -   [json](resolver/json.md)
     -   [css-lazy](resolver/css-lazy.md)
     -   [style-lazy](resolver/style-lazy.md)
+    -   [raw](resolver/raw.md)
     -   [wasm](resolver/wasm.md)
 
 -   [Develop](develop.md)

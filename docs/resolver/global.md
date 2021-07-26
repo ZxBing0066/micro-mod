@@ -48,7 +48,7 @@ mod.config({
 });
 
 // 引用模块
-mod.import(jquery).then($) => {
+mod.import(jquery).then($ => {
     console.log($, window.$);
 });
 ```
