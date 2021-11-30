@@ -7,8 +7,9 @@ type ScriptElement = HTMLScriptElement & {
 
 const scriptStateMap: { [href: string]: number } = {};
 
-function load(path, callback) {
+function load(path: string, callback: (event: Event) => void, options?: { crossOrigin?: string }) {
     const el = document.createElement('script') as ScriptElement;
+    if (options?.crossOrigin !== undefined) el.crossOrigin = options.crossOrigin;
     let loaded;
 
     function handler(event) {

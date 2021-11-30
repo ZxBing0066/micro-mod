@@ -1,7 +1,7 @@
 import pendingFactory from './pendingFactory';
 import { AnyFunction } from '../interface';
 
-export default func => {
+export default <T extends Function>(func: T): T => {
     const dataMap: {
         [key: string]: {
             // loading success error
@@ -16,7 +16,7 @@ export default func => {
         }[];
     } = {};
 
-    return async (key: string, ...args: unknown[]) => {
+    return (async (key: string, ...args: unknown[]) => {
         if (typeof key !== 'string') {
             return func(key, ...args);
         }
@@ -72,5 +72,5 @@ export default func => {
             }
             throw e;
         }
-    };
+    }) as unknown as T;
 };

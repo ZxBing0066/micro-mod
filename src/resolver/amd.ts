@@ -110,12 +110,12 @@ export default ({ module, register, import: _import }) => {
             await waitModule(moduleName, 6);
         }
         try {
-            const { js } = moduleInfo;
+            const { js, options } = moduleInfo;
             const script = js?.[0];
             if (!script) {
                 throw new Error(`There is no file for module: ${moduleName}`);
             }
-            await load(script);
+            await load(script, options);
             updateModule(moduleName, 2);
             let { deps, factory } = pickDefineQueue(moduleName);
             updateModule(moduleName, 3);

@@ -11,14 +11,14 @@ export default ({ module, register, import: _import }) => {
             await waitModule(moduleName, 6);
         }
         try {
-            const { js, dep } = moduleInfo;
+            const { js, dep, options } = moduleInfo;
             const script = js?.[0];
             if (!script) {
                 throw new Error(`There is no file for module: ${moduleName}`);
             }
             await _import(dep);
             updateModule(moduleName, 4);
-            await load(script);
+            await load(script, options);
             updateModule(moduleName, 6, { exports: window[globalName || moduleName] });
         } catch (error) {
             updateModule(moduleName, 7, { error });

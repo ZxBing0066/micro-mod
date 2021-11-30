@@ -126,6 +126,15 @@
             throw new Error('Wrong global named module loaded');
         }
     });
+    test('crossOrigin support', async () => {
+        const crossOrigin = await mod.import({
+            js: './src/crossOrigin.js',
+            options: { crossOrigin: '' }
+        });
+        if (crossOrigin) throw new Error('Loaded fail');
+        const el = document.querySelector('script[src="./src/crossOrigin.js"]');
+        if (!el.crossOrigin) throw new Error('crossOrigin Fail');
+    });
     mod.config({
         modules: {
             react: {
