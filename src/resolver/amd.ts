@@ -110,7 +110,7 @@ export default ({ module, register, import: _import }) => {
             await waitModule(moduleName, 6);
         }
         try {
-            const { js, options } = moduleInfo;
+            const { js, dep, options } = moduleInfo;
             const script = js?.[0];
             if (!script) {
                 throw new Error(`There is no file for module: ${moduleName}`);
@@ -119,13 +119,17 @@ export default ({ module, register, import: _import }) => {
             updateModule(moduleName, 2);
             let { deps, factory } = pickDefineQueue(moduleName);
             updateModule(moduleName, 3);
-            let depPending;
             if (!deps?.length) {
                 deps = typeof factory === 'function' ? parseDependencies(factory.toString()) : [];
             }
-            depPending = Promise.all(deps.filter(dep => !specialDepMap.hasOwnProperty(dep)).map(dep => _import(dep)));
+            // load require deps
+            const depsPending = Promise.all(
+                deps.filter(dep => !specialDepMap.hasOwnProperty(dep)).map(dep => _import(dep))
+            );
+            // load config deps
+            const depPending = Promise.all(dep.map(dep => _import(dep)));
             updateModule(moduleName, 4);
-            await depPending;
+            await Promise.all([depsPending, depPending]);
             updateModule(moduleName, 5, { factory, deps });
             defineModule(moduleName);
         } catch (error) {

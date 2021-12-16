@@ -137,9 +137,14 @@
     });
     mod.config({
         modules: {
+            'global-amd-dep': {
+                js: './src/global-amd-dep.js',
+                type: ['global', '_globalAmdDep']
+            },
             react: {
                 js: 'https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.development.js',
-                type: 'amd'
+                type: 'amd',
+                dep: 'global-amd-dep'
             },
             'react-dom': {
                 js: 'https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.development.js',
@@ -149,6 +154,7 @@
     });
     test('amd support', async () => {
         const [React, ReactDOM] = await mod.import(['react', 'react-dom']);
+        if(!window._globalAmdDep) throw new Error('Amd config dep load fail');
         if (React.version !== '16.13.1' || typeof React.lazy !== 'function') throw new Error('Wrong React loaded');
         if (ReactDOM.version !== '16.13.1' || typeof ReactDOM.render !== 'function')
             throw new Error('Wrong ReactDOM loaded');
