@@ -1,6 +1,6 @@
 # wasm resolver
 
-`wasm resolver` 能让 `mod` 支持懒加载全局变量模块。
+`wasm resolver` 能让 `mod` 支持加载 `wasm` 模块。
 
 ## 注册解析器
 
