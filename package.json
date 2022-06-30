@@ -1,5 +1,5 @@
 {
-  "name": "@rapiop/mod",
+  "name": "micro-mod",
   "version": "1.2.1",
   "description": "A module loader support umd and own md",
   "main": "lib/index.js",
