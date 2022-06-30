@@ -7,9 +7,9 @@
 ### npm 包
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 css-lazy 支持
-import cssLazyResolver from '@rapiop/mod/lib/resolver/css-lazy';
+import cssLazyResolver from 'micro-mod/lib/resolver/css-lazy';
 // 注册模块类型解析器
 mod.registerModuleResolver(cssLazyResolver);
 ```
@@ -22,9 +22,9 @@ mod.registerModuleResolver(cssLazyResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
         <!-- 添加 css-lazy 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/resolver-css-lazy.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-css-lazy.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>

@@ -8,15 +8,15 @@
 ## 安装
 
 ```bash
-npm install @rapiop/mod
+npm install micro-mod
 ```
 
 ## 引用
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 amd 支持
-import amdResolver from '@rapiop/mod/lib/resolver/amd';
+import amdResolver from 'micro-mod/lib/resolver/amd';
 // 注册模块类型解析器
 mod.registerModuleResolver(amdResolver);
 ```

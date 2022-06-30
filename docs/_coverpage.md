@@ -7,7 +7,7 @@
 -   Use like es module
 
 [GitHub](https://github.com/rapiop/mod)
-[NPM](https://www.npmjs.com/package/@rapiop/mod)
+[NPM](https://www.npmjs.com/package/micro-mod)
 [Get Started](quickStart.md)
 
 <!-- background color -->

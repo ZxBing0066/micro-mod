@@ -7,9 +7,9 @@
 ### npm 包
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 wasm 支持
-import wasmResolver from '@rapiop/mod/lib/resolver/wasm';
+import wasmResolver from 'micro-mod/lib/resolver/wasm';
 // 注册模块类型解析器
 mod.registerModuleResolver(wasmResolver);
 ```
@@ -22,9 +22,9 @@ mod.registerModuleResolver(wasmResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
         <!-- 添加 wasm 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/resolver-wasm.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-wasm.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>

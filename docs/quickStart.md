@@ -13,13 +13,13 @@
 ### 使用 npm 包
 
 ```bash
-npm install @rapiop/mod
+npm install micro-mod
 ```
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 amd 支持
-import amdResolver from '@rapiop/mod/lib/resolver/amd';
+import amdResolver from 'micro-mod/lib/resolver/amd';
 // 注册模块类型解析器
 mod.registerModuleResolver(amdResolver);
 ```
@@ -32,9 +32,9 @@ mod.registerModuleResolver(amdResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
         <!-- 添加 amd 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/resolver-amd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-amd.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>
@@ -92,7 +92,7 @@ mod.config({
     starter.js
 
     ```js
-    import mod from '@rapiop/mod';
+    import mod from 'micro-mod';
     window.mod = mod;
     ```
 
@@ -123,14 +123,14 @@ mod.config({
     a/module.js
 
     ```js
-    import mod from '@rapiop/mod';
+    import mod from 'micro-mod';
     mod.export('module', { foo: () => console.log('bar') });
     ```
 
 -   在项目 b 中引用模块
 
     ```js
-    import mod from '@rapiop/mod';
+    import mod from 'micro-mod';
     (async () => {
         mod.config({ modules: { module: 'a/module.js' } });
         const module = await mod.import('module');

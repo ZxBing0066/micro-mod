@@ -49,8 +49,8 @@ ReactDOM.render(<div>Hello React</div>, document.querySelector('#app'));
     entry.js
 
     ```js
-    import mod from '@rapiop/mod';
-    import { moduleMap as modules } from '@rapiop/mod/lib/module';
+    import mod from 'micro-mod';
+    import { moduleMap as modules } from 'micro-mod/lib/module';
 
     import dep from './dep';
 

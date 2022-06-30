@@ -7,9 +7,9 @@
 ### npm 包
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 json 支持
-import jsonResolver from '@rapiop/mod/lib/resolver/json';
+import jsonResolver from 'micro-mod/lib/resolver/json';
 // 注册模块类型解析器
 mod.registerModuleResolver(jsonResolver);
 ```
@@ -22,9 +22,9 @@ mod.registerModuleResolver(jsonResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
         <!-- 添加 json 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod@0.1.13/dist/resolver-json.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-json.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>
@@ -40,7 +40,7 @@ mod.registerModuleResolver(jsonResolver);
 mod.config({
     modules: {
         jsonData: {
-            file: 'https://cdn.jsdelivr.net/npm/@rapiop/mod/package.json',
+            file: 'https://cdn.jsdelivr.net/npm/micro-mod/package.json',
             type: 'json'
         }
     }

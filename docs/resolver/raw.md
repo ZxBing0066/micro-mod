@@ -7,9 +7,9 @@
 ### npm 包
 
 ```js
-import mod from '@rapiop/mod';
+import mod from 'micro-mod';
 // 导入 raw 支持
-import rawResolver from '@rapiop/mod/lib/resolver/raw';
+import rawResolver from 'micro-mod/lib/resolver/raw';
 // 注册模块类型解析器
 mod.registerModuleResolver(rawResolver);
 ```
@@ -22,9 +22,9 @@ mod.registerModuleResolver(rawResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/mod.min.js"></script>
         <!-- 添加 raw 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/@rapiop/mod/dist/resolver-raw.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/resolver-raw.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>
