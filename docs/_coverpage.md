@@ -6,7 +6,7 @@
 -   Non-invasive to your project
 -   Use like es module
 
-[GitHub](https://github.com/rapiop/mod)
+[GitHub](https://github.com/ZxBing0066/micro-mod)
 [NPM](https://www.npmjs.com/package/micro-mod)
 [Get Started](quickStart.md)
 

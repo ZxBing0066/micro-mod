@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rapiop/mod.git"
+    "url": "git+https://github.com/ZxBing0066/micro-mod.git"
   },
   "files": [
     "lib",
@@ -13,16 +13,16 @@
     "dist"
   ],
   "keywords": [
-    "rapiop",
+    "micro",
     "module",
     "loader",
     "css",
     "style"
   ],
   "bugs": {
-    "url": "https://github.com/rapiop/mod/issues"
+    "url": "https://github.com/ZxBing0066/micro-mod/issues"
   },
-  "homepage": "https://github.com/rapiop/mod#readme",
+  "homepage": "https://github.com/ZxBing0066/micro-mod#readme",
   "author": "ZxBing0066",
   "license": "MIT",
   "dependencies": {

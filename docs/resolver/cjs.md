@@ -22,9 +22,9 @@ mod.registerModuleResolver(cjsResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/mod.min.js"></script>
         <!-- 添加 cjs 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-cjs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/resolver-cjs.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>
@@ -44,11 +44,11 @@ mod.config({
         },
         'scheduler': {
             js: '//cdn.jsdelivr.net/npm/scheduler@0.20.2/cjs/scheduler.development.js',
-            type: 'csj'
+            type: 'cjs'
         },
         'scheduler/tracing': {
             js: '//cdn.jsdelivr.net/npm/scheduler@0.20.2/cjs/scheduler-tracing.development.js',
-            type: 'csj'
+            type: 'cjs'
         },
         react: {
             js: '//cdn.jsdelivr.net/npm/react@17.0.2/cjs/react.development.js',

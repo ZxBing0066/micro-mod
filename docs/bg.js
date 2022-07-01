@@ -1,6 +1,6 @@
 mod.import([
-    '//cdn.jsdelivr.net/npm/micro-mod@1.0.1/dist/resolver-amd.min.js',
-    '//cdn.jsdelivr.net/npm/micro-mod@1.0.1/dist/resolver-cjs.min.js'
+    '//cdn.jsdelivr.net/npm/micro-mod@1/dist/resolver-amd.min.js',
+    '//cdn.jsdelivr.net/npm/micro-mod@1/dist/resolver-cjs.min.js'
 ]).then(() => {
     mod.config({
         modules: {

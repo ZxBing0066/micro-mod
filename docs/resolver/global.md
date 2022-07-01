@@ -22,9 +22,9 @@ mod.registerModuleResolver(globalResolver);
     <head>
         <meta charset="UTF-8" />
         <title>mod</title>
-        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/mod.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/mod.min.js"></script>
         <!-- 添加 global 支持 -->
-        <script src="https://cdn.jsdelivr.net/npm/micro-mod@0.1.13/dist/resolver-global.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/micro-mod/dist/resolver-global.min.js"></script>
         <script src="app.js"></script>
     </head>
     <body>
